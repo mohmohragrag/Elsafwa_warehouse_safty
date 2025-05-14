@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تحليل أمان الإطار الفولاذي</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>تحليل أمان الإطار الفولاذي</h1>
+    <form id="frameForm">
+        <fieldset>
+            <legend>اختيار نوع المقطع</legend>
+            <label>نوع مقطع الرافتر:
+                <select id="rafterType" onchange="toggleRafterInputs()">
+                    <option value="builtup">Built-Up</option>
+                    <option value="box">علبة</option>
+                    <option value="pipe">ماسورة</option>
+                </select>
+            </label>
+            <label>نوع مقطع العمود:
+                <select id="columnType" onchange="toggleColumnInputs()">
+                    <option value="builtup">Built-Up</option>
+                    <option value="box">علبة</option>
+                    <option value="pipe">ماسورة</option>
+                </select>
+            </label>
+        </fieldset>
+
+        <fieldset id="rafterInputs">
+            <legend>أبعاد الرافتر</legend>
+            <div id="rafter-builtup">
+                <label>bf_r: <input type="number" id="bf_r"></label>
+                <label>tf_r: <input type="number" id="tf_r"></label>
+                <label>tw_r: <input type="number" id="tw_r"></label>
+                <label>hw_r: <input type="number" id="hw_r"></label>
+            </div>
+            <div id="rafter-box" style="display:none;">
+                <label>طول العلبة: <input type="number" id="box_l_r"></label>
+                <label>عرض العلبة: <input type="number" id="box_b_r"></label>
+                <label>سمك العلبة: <input type="number" id="box_t_r"></label>
+            </div>
+            <div id="rafter-pipe" style="display:none;">
+                <label>القطر الخارجي: <input type="number" id="pipe_d_r"></label>
+                <label>السمك: <input type="number" id="pipe_t_r"></label>
+            </div>
+        </fieldset>
+
+        <fieldset id="columnInputs">
+            <legend>أبعاد العمود</legend>
+            <div id="column-builtup">
+                <label>bf_c: <input type="number" id="bf_c"></label>
+                <label>tf_c: <input type="number" id="tf_c"></label>
+                <label>tw_c: <input type="number" id="tw_c"></label>
+                <label>hw_c: <input type="number" id="hw_c"></label>
+            </div>
+            <div id="column-box" style="display:none;">
+                <label>طول العلبة: <input type="number" id="box_l_c"></label>
+                <label>عرض العلبة: <input type="number" id="box_b_c"></label>
+                <label>سمك العلبة: <input type="number" id="box_t_c"></label>
+            </div>
+            <div id="column-pipe" style="display:none;">
+                <label>القطر الخارجي: <input type="number" id="pipe_d_c"></label>
+                <label>السمك: <input type="number" id="pipe_t_c"></label>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>البيانات العامة</legend>
+            <label>ارتفاع العمود (م): <input type="number" id="H" required></label>
+            <label>أقصى ارتفاع (م): <input type="number" id="H_total" required></label>
+            <label>السبان (م): <input type="number" id="span" required></label>
+            <label>المسافة بين الإطارات (م): <input type="number" id="spacing" required></label>
+            <label>الحمل على السقف (كجم/م²): <input type="number" id="load_area" required></label>
+            <label>جهة تثبيت الرافتر على العمود:
+                <select id="supportPosition">
+                    <option value="طرف العمود">طرف العمود</option>
+                    <option value="منتصف العمود">منتصف العمود</option>
+                    <option value="أسفل العمود">أسفل العمود</option>
+                </select>
+            </label>
+            <label>معامل الأمان:
+                <select id="FS">
+                    <option value="1.5">1.5</option>
+                    <option value="2">2</option>
+                </select>
+            </label>
+        </fieldset>
+
+        <fieldset>
+            <legend>عمود وسط؟</legend>
+            <label>هل يوجد عمود وسط؟ 
+                <select id="hasMiddleColumn" onchange="toggleMiddleColumnInputs()">
+                    <option value="no">لا</option>
+                    <option value="yes">نعم</option>
+                </select>
+            </label>
+            <div id="middleColumnInputs" style="display:none;">
+                <label>bf_m: <input type="number" id="bf_m"></label>
+                <label>tf_m: <input type="number" id="tf_m"></label>
+                <label>tw_m: <input type="number" id="tw_m"></label>
+                <label>hw_m: <input type="number" id="hw_m"></label>
+            </div>
+        </fieldset>
+
+        <button type="submit">تحليل</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
